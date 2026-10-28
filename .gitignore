@@ -1,0 +1,67 @@
+# ==========================================
+# 1. Project Specific (Data, Uploads, DB)
+# ==========================================
+# Never push user data, uploaded files, or the local database to GitHub
+loan_knowledge_base.db
+temp_uploads/
+temp_outputs/
+secure_uploads/
+quarantine/
+*.png
+*.jpg
+*.jpeg
+*.tiff
+
+# ==========================================
+# 2. Python & Virtual Environments
+# ==========================================
+# Ignore compiled python files and cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Ignore virtual environments (uv creates .venv by default)
+.venv/
+venv/
+ENV/
+env/
+
+# ==========================================
+# 3. Environment & Secrets
+# ==========================================
+# Never push API keys or secrets (if you add them later)
+.env
+.env.local
+.streamlit/secrets.toml
+
+# ==========================================
+# 4. IDE & OS Files
+# ==========================================
+# VS Code
+.vscode/
+!.vscode/extensions.json
+
+# PyCharm / JetBrains
+.idea/
+*.iml
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ==========================================
+# 5. Testing & Coverage
+# ==========================================
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
