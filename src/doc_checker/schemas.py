@@ -1,6 +1,6 @@
 # src/doc_checker/schemas.py
 from pydantic import BaseModel, Field
-from typing import List, Optional, Literal
+from typing import List, Optional, Literal, Dict, Any
 from pathlib import Path
 
 class BoundingBox(BaseModel):
@@ -43,13 +43,16 @@ class DocumentContext(BaseModel):
     # Stage 1: Normalization
     page_image_paths: List[Path] = []
     
-    # Stage 2: Classification
+    # Stage 2: Classification & Extraction
     render_class: Optional[Literal["native_text", "scanned", "unknown"]] = None
     doc_type: Optional[Literal["bank_statement", "salary_slip", "pan_card", "unknown"]] = None
     
+    # ADDED THIS: To store the extracted JSON profile across tabs
+    vlm_extracted_data: Dict[str, Any] = {} 
+    
     # Stage 3: Extraction
-    extracted_text: List[str] = [] # Text per page
-    extracted_tables: List[List[List[str]]] = [] # Tables per page (list of rows, list of cells)
+    extracted_text: List[str] = [] 
+    extracted_tables: List[List[List[str]]] = [] 
     
     # Stage 4 & 5: Detection & Aggregation (Future)
     findings: List[Finding] = []

@@ -21,6 +21,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
+.python-version
 
 # Ignore virtual environments (uv creates .venv by default)
 .venv/
@@ -65,3 +66,4 @@ $RECYCLE.BIN/
 .coverage
 htmlcov/
 .mypy_cache/
+loan_knowledge_base.db

@@ -9,7 +9,7 @@ class OllamaConfig:
     base_url: str = "http://localhost:11434"
     extraction_model: str = "qwen3-vl:2b"
     embedding_model: str = "embeddinggemma-2:440m"
-    chat_model: str = "qwen3.5:0.8b"  # For future agent
+    chat_model: str = "qwen3.5:2b"  # For future agent
     timeout: int = 120
     context_size: int = 8192
 

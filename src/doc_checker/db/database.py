@@ -48,6 +48,7 @@ def init_db():
                 doc_id TEXT PRIMARY KEY,
                 full_text_md TEXT,
                 page_texts TEXT,  -- JSON array of page texts
+                raw_tables_json TEXT,
                 extraction_method TEXT,
                 FOREIGN KEY(doc_id) REFERENCES documents(doc_id)
             )
@@ -119,15 +120,15 @@ def save_profile_to_db(doc_id: str, profile: dict, raw_json: str):
               profile.get("pan_number"), datetime.now().isoformat(), raw_json))
         conn.commit()
 
-def save_document_text(doc_id: str, full_text_md: str, page_texts: list, method: str = "pdfplumber"):
-    """Save raw extracted text as markdown."""
+def save_document_text(doc_id: str, full_text_md: str, page_texts: list, raw_tables: list, method: str = "pdfplumber"):
+    """Save raw extracted text and raw tables as JSON."""
     with sqlite3.connect(config.database.db_path) as conn:
         cursor = conn.cursor()
         cursor.execute('''
             INSERT OR REPLACE INTO document_text 
-            (doc_id, full_text_md, page_texts, extraction_method)
-            VALUES (?, ?, ?, ?)
-        ''', (doc_id, full_text_md, json.dumps(page_texts), method))
+            (doc_id, full_text_md, page_texts, raw_tables_json, extraction_method)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (doc_id, full_text_md, json.dumps(page_texts), json.dumps(raw_tables), method))
         conn.commit()
 
 def save_embeddings(doc_id: str, chunks: list, embeddings: list, model_name: str):
